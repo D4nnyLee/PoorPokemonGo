@@ -4,6 +4,9 @@ import java.awt.Image;
 
 import java.lang.Thread.State;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import javax.swing.*;
 public class Property {
 	private JPanel battleField;
@@ -23,6 +26,14 @@ public class Property {
 	public JProgressBar blooBar;
 	public JProgressBar M_blooBar;
 	public JProgressBar powerBar;
+	private Timer playerIdel=new Timer();
+	
+	
+	//傳給battle跑動畫用的
+	public int playerImageNum=0;
+	public String playerPath="image\\player\\player0";
+	public int playerWidth=150;
+	public int playerHeight=300;
 	public Property(JPanel  fieldJPanel) {
 		// TODO Auto-generated constructor stub
 		battleField=fieldJPanel;
@@ -39,6 +50,7 @@ public class Property {
 		//battleField.add(pro.getButton());
 		
 		
+		
 		//這邊new我以及怪獸
 		newCharacter();
 		//這邊new property
@@ -47,6 +59,26 @@ public class Property {
 		newskillButton();
 		//這邊new戰鬥場景(最後New才不會被圖層蓋掉)
 		newBackground();
+		
+		
+		
+		//開始player的timer
+		playerIdel.schedule(new TimerTask() {
+			
+			@Override
+			public void run() {
+				
+				// TODO Auto-generated method stub
+
+				ImageIcon image = new ImageIcon(playerPath+playerImageNum+".gif");//例項化ImageIcon 物件
+				image.setImage(image.getImage().getScaledInstance(playerWidth, playerHeight,Image.SCALE_DEFAULT ));
+				player.setIcon(image);
+				
+				++playerImageNum;
+				if(playerImageNum>=43)
+					playerImageNum=0;
+			}
+		}, 0,50);
 	}
 	
 	private void newProperty() {
@@ -103,13 +135,13 @@ public class Property {
 	private void newBackground() {
 		try {
 			JLabel jlb = new JLabel();	//例項化JLble
-	int width = 1300,height = 700;	//這是圖片和JLable的寬度和高度
-	ImageIcon image = new ImageIcon("image\\field1.png");//例項化ImageIcon 物件
+			int width = 1300,height = 700;	//這是圖片和JLable的寬度和高度
+			ImageIcon image = new ImageIcon("image\\field1.png");//例項化ImageIcon 物件
 	/*下面這句意思是:得到此圖示的 Image(image.getImage());
 	在此基礎上建立它的縮放版本,縮放版本的寬度,高度與JLble一致(getScaledInstance(width, height,Image.SCALE_DEFAULT ))
 	最後該影象就設定為得到的縮放版本(image.setImage)
 	*/
-	image.setImage(image.getImage().getScaledInstance(width, height,Image.SCALE_DEFAULT ));//可以用下面三句程式碼來代替
+			image.setImage(image.getImage().getScaledInstance(width, height,Image.SCALE_DEFAULT ));//可以用下面三句程式碼來代替
 	//Image img = image.getImage();
 	//img = img.getScaledInstance(width, height, Image.SCALE_DEFAULT);
 	//image.setImage(img);
@@ -126,12 +158,12 @@ public class Property {
 	private void newCharacter() {
 		
 	player = new JLabel();	//例項化JLble
-	int width = 100,height = 200;	//這是圖片和JLable的寬度和高度
-	ImageIcon image = new ImageIcon("image\\player.png");//例項化ImageIcon 物件
-	image.setImage(image.getImage().getScaledInstance(width, height,Image.SCALE_DEFAULT ));
-	player.setIcon(image);
+	int width = this.playerWidth;
+	int height = this.playerHeight;
 	player.setSize(width, height);
-	player.setLocation(500,400);
+	player.setLocation(500,300);
+	//player.setOpaque(true); 
+	//player.setBackground(Color.red);
 	battleField.add(player);
 	
 	

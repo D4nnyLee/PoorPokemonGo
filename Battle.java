@@ -1,6 +1,7 @@
 
 import java.awt.Color;
 import java.awt.Font;
+import 	java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,7 +13,8 @@ public class Battle extends JPanel implements ActionListener{
 	 private Property property;
 	 private Timer AnnounceRound=new Timer();
 	 private Timer AnnounceSkill=new Timer();
-	 private Timer gameTimer=new Timer();
+	 private Timer myTimer=new Timer();
+	 private Timer monseTimer=new Timer();
 	 private JLabel allAnnounce=new JLabel();
 	 private boolean round=true;
 	 public Battle() {
@@ -25,17 +27,23 @@ public class Battle extends JPanel implements ActionListener{
 		this.add(allAnnounce);
 		//這邊傳遞data
 		property=new Property(this);
-		
 		addButtonEvent();
+		
+		
 		//開始遊戲
-		gameTimer.schedule(new TimerTask() {		
+		allAnnounce.setText("我的回合!");
+		AnnounceRound.schedule(new TimerTask() {
+			
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				
-				StartGame();
+				allAnnounce.setText("");
+				for(int i=0;i<property.Y_skill.length;++i)			
+					property.skillUse.get(i).setEnabled(true);
 			}
-		}, 0, 2000);
+		}, 3000);
+		
+		
 
 		System.out.println("fuck");
 	}
@@ -76,16 +84,24 @@ public class Battle extends JPanel implements ActionListener{
 		default:
 			break;
 		}
+		for(int i=0;i<property.skillUse.size();++i)
+			//System.out.println(property.skillUse.get(i));
+			property.skillUse.get(i).setEnabled(false);
+			
+			
+		
 		AnnounceSkill.schedule(new TimerTask() {
 			
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
 				allAnnounce.setText("");
+				round=true;
+				StartGame();
+				
 			}
-		}, 1000);
-		attack=0;
-		blood=0;
+		}, 2000);
+		
 		
 
 	}
@@ -94,42 +110,94 @@ public class Battle extends JPanel implements ActionListener{
 		{
 			//System.out.println(property.skillUse.get(i));
 			property.skillUse.get(i).addActionListener(this);
-			
+			property.skillUse.get(i).setEnabled(false);
 			
 		}
 		//System.out.println(property.skillUse.get(0).getActionListeners().length);
 		
 	}
+	private void playerRound() {
+		int tempWidth=property.playerWidth;
+		int tempHeight=property.playerHeight;
+		int tempX=property.player.getLocation().x;
+		int tempY=property.player.getLocation().y;
+		
+		//這裡跑腳色動畫
+		property.playerImageNum=0;
+		property.playerPath="image\\playerAttack\\player";
+		property.playerWidth=400;
+		property.playerHeight=500;
+		property.player.setLocation(500,100);
+		property.player.setSize(400,500);
+		
+		//腳色攻擊
+		
+		property.M_blood-=property.Y_attack;
+		property.M_blooBar.setValue(property.M_blood);
+		++property.M_power;
+		
+		
+		//等技能跑完
+		try {
+			Thread.sleep(2300);
+		} catch (InterruptedException exception) {
+			// TODO: handle exception
+			exception.printStackTrace();
+		}
+		
+		
+		//技能施展完要回來
+		property.playerPath="image\\player\\player0";
+		property.playerWidth=tempWidth;
+		property.playerHeight=tempHeight;
+		property.player.setLocation(tempX,tempY);
+		property.player.setSize(tempWidth,tempHeight);
+		
+	}
+	private void monsterRound() {
+		
+		allAnnounce.setText("敵方回合!");
+		AnnounceRound.schedule(new TimerTask() {
+			
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				allAnnounce.setText("");
+				property.powerBar.setValue(property.M_power);//power上升
+				property.Y_blood-=property.M_attack;
+				property.blooBar.setValue(property.Y_blood);
+			}
+		}, 3000);
+
+	}
 	
-	
-	
+	//按下button會開始
 	public void StartGame() {
 		//我的回合 
-		if(round)
-		{
-			allAnnounce.setText("我的回合!");
-			AnnounceRound.schedule(new TimerTask() {
-				
-				@Override
-				public void run() {
-					// TODO Auto-generated method stub
-					allAnnounce.setText("");
-				}
-			}, 1000);
-			round=false;
+		playerRound();
+		monsterRound();	
+		//等敵方回合跑完
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException exception) {
+			// TODO: handle exception
+			exception.printStackTrace();
 		}
-		else {
-			allAnnounce.setText("敵方回合!");
-			AnnounceRound.schedule(new TimerTask() {
-				
-				@Override
-				public void run() {
-					// TODO Auto-generated method stub
-					allAnnounce.setText("");
-				}
-			}, 1000);
-			round=true;
-		}
+		System.out.println("successful");
+		allAnnounce.setText("我的回合!");
+		AnnounceRound.schedule(new TimerTask() {
+			
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				allAnnounce.setText("");
+				for(int i=0;i<property.skillUse.size();++i)
+					//System.out.println(property.skillUse.get(i));
+					property.skillUse.get(i).setEnabled(true);
+			}
+		}, 3000);
+
+		
 		 
 	 }
 	
