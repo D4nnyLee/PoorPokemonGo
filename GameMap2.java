@@ -17,6 +17,8 @@ public class GameMap2 extends JPanel implements ActionListener{
 		
 		this.addKeyListener(new KeyListener() {
 			public void keyPressed(KeyEvent e) {
+				
+				//System.out.println(e.getKeyChar());
 				if(e.getKeyCode() == KeyEvent.VK_UP) {
 					person_y -=10;
 					character.setLocation(person_x,person_y);
