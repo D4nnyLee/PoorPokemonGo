@@ -1,8 +1,8 @@
 import java.awt.*;
+import java.awt.event.*;
 import java.util.*;
 
 import javax.swing.*;
-import javax.swing.plaf.basic.DefaultMenuLayout;
 
 public class Store extends JPanel
 {
@@ -28,7 +28,14 @@ public class Store extends JPanel
         productList.put("H_test", new Product("H_test", 300, this));
 
         remainMoney = new JLabel("0");
+
         exitButton = new JButton("Exit");
+        exitButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e)
+            {
+                exit();
+            }
+        });
 
         formProperLayout();
 
@@ -43,31 +50,43 @@ public class Store extends JPanel
     public void init(Status user)
     {
         this.user = user;
+        productList.forEach((k, v) -> { v.reset(); });
+        remainMoney.setText(String.valueOf(user.money));
         setVisible(true);
     }
 
     /**
      * This method should be called when exiting the store.
      */
-    public Status exit()
+    public void exit()
     {
         setVisible(false);
-        return user;
     }
 
     public void buy(Product p, Integer n)
     {
-        // if (n * p.getPrice() > user.money)
-        //     return;
+        if (n * p.getPrice() > user.money) {
+            JFrame warning = new JFrame();
+            JLabel text = new JLabel("Not enough money!!");
+            text.setFont(new Font(text.getFont().getFamily(), text.getFont().getStyle(), 30));
+            warning.add(text);
+            warning.setVisible(true);
+            warning.pack();
+            return;
+        }
 
         user.money -= n * p.getPrice();
         remainMoney.setText(String.valueOf(user.money));
-        /* TODO: add skill to user's skill list */
+        if (user.skill.contains(p.getName()))
+            user.skill.put(p.getName(), user.skill.get(p.getName()) + n);
+        else
+            user.skill.put(p.getName(), n);
     }
 
     private void formProperLayout()
     {
         JLabel l = new JLabel("Money:");
+        JLabel img = new JLabel(new ImageIcon("image/store/sale.gif"));
         GroupLayout layout = new GroupLayout(this);
         setLayout(layout);
 
@@ -90,8 +109,9 @@ public class Store extends JPanel
         GroupLayout.ParallelGroup hg4 = layout.createParallelGroup(GroupLayout.Alignment.LEADING);
         hg4.addComponent(productList.get("mask"));
 
-        GroupLayout.ParallelGroup hg5 = layout.createParallelGroup(GroupLayout.Alignment.LEADING);
+        GroupLayout.ParallelGroup hg5 = layout.createParallelGroup(GroupLayout.Alignment.CENTER);
         hg5.addGroup(layout.createSequentialGroup().addComponent(l).addComponent(remainMoney));
+        hg5.addComponent(img);
         hg5.addComponent(exitButton);
 
         layout.setHorizontalGroup(layout.createSequentialGroup()
@@ -113,6 +133,7 @@ public class Store extends JPanel
         vg2.addComponent(productList.get("ticket"));
         vg2.addComponent(productList.get("redblue"));
         vg2.addComponent(productList.get("underwear"));
+        vg2.addComponent(img);
 
         GroupLayout.ParallelGroup vg3 = layout.createParallelGroup(GroupLayout.Alignment.CENTER);
         vg3.addComponent(productList.get("phone"));
@@ -129,7 +150,9 @@ public class Store extends JPanel
     {
         JFrame f = new JFrame("123");
         Store st = new Store();
-        st.init(new Status());
+        Status u = new Status();
+        u.money = 100;
+        st.init(u);
 
         f.add(st);
         // f.setSize(Toolkit.getDefaultToolkit().getScreenSize());

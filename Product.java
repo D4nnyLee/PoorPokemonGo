@@ -1,6 +1,5 @@
 import java.awt.*;
 import java.awt.event.*;
-
 import javax.swing.*;
 
 public class Product extends JPanel
@@ -29,9 +28,19 @@ public class Product extends JPanel
         formProperLayout();
     }
 
+    public String getName()
+    {
+        return name.getText();
+    }
+
     public Integer getPrice()
     {
         return Integer.parseInt(price.getText());
+    }
+
+    public void reset()
+    {
+        amount.setValue(0);
     }
 
     private void formProperLayout()
