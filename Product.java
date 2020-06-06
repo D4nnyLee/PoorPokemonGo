@@ -14,10 +14,10 @@ public class Product extends JPanel
         name = new JLabel(n);
         price = new JLabel(p.toString());
         amount = new JSpinner(new SpinnerNumberModel(0, 0, 99, 1));
+        amount.setMaximumSize(new Dimension(100, 25));
         container = s;
 
         buy = new JButton("Buy");
-        Product This = this;
         buy.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e)
             {

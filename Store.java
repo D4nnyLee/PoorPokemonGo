@@ -10,9 +10,12 @@ public class Store extends JPanel
     private Status user;
     private JLabel remainMoney;
     private JButton exitButton;
+    private GameMap2 map2;
 
-    public Store()
+    public Store(GameMap2 mp2)
     {
+    	System.out.println(mp2.getClass());
+    	map2 = mp2;
         productList = new Hashtable<String, Product>();
         productList.put("leg", new Product("leg", 50, this));
         productList.put("coffee", new Product("coffee", 50, this));
@@ -39,6 +42,7 @@ public class Store extends JPanel
 
         formProperLayout();
 
+        setSize(Toolkit.getDefaultToolkit().getScreenSize());
         setVisible(false);
     }
 
@@ -50,9 +54,11 @@ public class Store extends JPanel
     public void init(Status user)
     {
         this.user = user;
+        map2.setVisible(false);
         productList.forEach((k, v) -> { v.reset(); });
         remainMoney.setText(String.valueOf(user.money));
         setVisible(true);
+        System.out.println("init");
     }
 
     /**
@@ -61,6 +67,8 @@ public class Store extends JPanel
     public void exit()
     {
         setVisible(false);
+        map2.setVisible(true);
+        map2.requestFocusInWindow();
     }
 
     public void buy(Product p, Integer n)
@@ -86,6 +94,7 @@ public class Store extends JPanel
     private void formProperLayout()
     {
         JLabel l = new JLabel("Money:");
+       
         JLabel img = new JLabel(new ImageIcon("image/store/sale.gif"));
         GroupLayout layout = new GroupLayout(this);
         setLayout(layout);
@@ -146,18 +155,4 @@ public class Store extends JPanel
                 layout.createSequentialGroup().addGroup(vg1).addGroup(vg2).addGroup(vg3));
     }
 
-    public static void main(String[] args)
-    {
-        JFrame f = new JFrame("123");
-        Store st = new Store();
-        Status u = new Status();
-        u.money = 100;
-        st.init(u);
-
-        f.add(st);
-        // f.setSize(Toolkit.getDefaultToolkit().getScreenSize());
-        f.pack();
-        f.setVisible(true);
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    }
 }
