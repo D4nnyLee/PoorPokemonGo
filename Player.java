@@ -98,23 +98,26 @@ public class Player extends Property {
 	private void newskillButton() {
 		//System.out.print(Y_skill[0]);
 		skill.forEach((k,v)->{
-			
-			JButton button=new JButton(k);
-			button.setSize(150,50);
-			button.setVisible(true);
-			button.setLocation(0+170*(i/5),400+50*(i%5));
-			JLabel label=new JLabel(v.toString());
-			label.setSize(20,20);
-			label.setLocation(150+150*(i/5),400+50*(i%5));
-			label.setForeground(Color.white);
-			label.setFont(new Font("dialog",1,20));
-			
-			
-			skillWatched.put(k, label);
-		    skillUse.add(button);    
-			battleField.add(button);
-			battleField.add(label);
-			i++;
+			if(v>0)
+			{
+				JButton button=new JButton(k);
+				button.setSize(150,50);
+				button.setVisible(true);
+				button.setLocation(0+200*(i/5),200+50*(i%5));
+				JLabel label=new JLabel(v.toString());
+				label.setSize(50,20);
+				label.setLocation(150+200*(i/5),200+50*(i%5));
+				label.setForeground(Color.white);
+				label.setFont(new Font("dialog",1,20));
+				
+				
+				skillWatched.put(k, label);
+			    skillUse.add(button);    
+				battleField.add(button);
+				battleField.add(label);
+				i++;
+			}
+
 		});
 
 		

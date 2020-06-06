@@ -39,6 +39,7 @@ public class Monster extends Property{
 		int height=0;
 		int count=0;
 		int locY=0;
+		int locX=700;
 		switch (name) {
 		case "TA":
 			width = 300;
@@ -46,8 +47,45 @@ public class Monster extends Property{
 			count=0;
 			locY=300;
 			break;
+		case "pein":
+			width=500;
+			height=600;
+			locY=0;
+			count=1;	
+			break;
+		case "DataStructure":
+			width=500;
+			height=600;
+			locY=0;
+			count=2;	
+			break;
+		case "ComputerScience":
+			width=200;
+			height=300;
+			locY=250;
+			count=3;
+			break;
+		case "monster4":
+			width=200;
+			height=300;
+			locY=250;
+			count=4;
+			break;
+		case "monster5":
+			width=200;
+			height=300;
+			locY=250;
+			count=5;
+			break;
+		case "monster6":
+			width=200;
+			height=300;
+			locY=250;
+			count=6;
+			break;
+		
 		default:
-			width=400;
+			width=500;
 			height=600;
 			locY=0;
 			count=2;
@@ -56,9 +94,65 @@ public class Monster extends Property{
 		ImageIcon image2;
 		if(attackFlag)
 		{
+			switch (name) {
+			case "ComputerScience":
+				width=400;
+				height=500;
+				locY=150;
+				break;
+			case "monster4":
+				width=500;
+				height=500;
+				locY=100;
+				locX=500;
+				break;
+			case "monster5":
+				width=300;
+				height=300;
+				locY=250;
+				locX=700;
+				break;
+			case "monster6":
+				width=500;
+				height=300;
+				locY=250;
+				locX=550;
+				break;
+
+			default:
+				break;
+			}
 			 image2= new ImageIcon("image\\monster\\"+count+"fire.gif");//例項化ImageIcon 物件
 		}	
 		else {
+			switch (name) {
+			case "ComputerScience":
+				width=250;
+				height=300;
+				locY=250;
+				locX=700;
+				break;
+			case "monster4":
+				width=250;
+				height=300;
+				locY=250;
+				locX=700;
+				break;
+			case "monster5":
+				width=250;
+				height=300;
+				locY=250;
+				locX=700;
+				break;
+			case "monster6":
+				width=250;
+				height=300;
+				locY=250;
+				locX=700;
+				break;
+			default:
+				break;
+			}
 			image2 = new ImageIcon("image\\monster\\"+count+".gif");//例項化ImageIcon 物件
 		}
 		image2.setImage(image2.getImage().getScaledInstance(width, height,Image.SCALE_DEFAULT ));
@@ -67,7 +161,7 @@ public class Monster extends Property{
 		//m.setBackground(Color.red);
 		m.setIcon(image2);
 		m.setSize(width, height);
-		m.setLocation(700,locY);
+		m.setLocation(locX,locY);
 		
 	}
 	public void setMonsterProperty() {
@@ -89,7 +183,7 @@ public class Monster extends Property{
 		attackText.setForeground(Color.white);
 		attackText.setFont(new Font("dialog", 1, 20));
 		powerBar=new JProgressBar();
-		powerBar.setMaximum(10);
+		powerBar.setMaximum(5);
 		powerBar.setMinimum(0);
 		powerBar.setValue(this.power);
 		powerBar.setForeground(Color.yellow);

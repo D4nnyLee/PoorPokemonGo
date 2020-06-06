@@ -17,7 +17,7 @@ public class Status {
 		this.name=n;
 		setStatus();
 		skill=new Hashtable<String, Integer>();
-		skill.put("None",2);
+		skill.put("Normal",999);
 	}
 	private void setStatus() {
 		switch (name) {
@@ -28,27 +28,55 @@ public class Status {
 			break;
 		case"TA":
 			attack=10;
-			blood=25;
+			blood=10;
 			money=10;
-			power=0;
+			power=5;
 			break;
 		case "DataStructure":
 			attack=20;
 			blood=100;
 			money=50;
-			power=0;		
-		break;
+			power=5;		
+			break;
 		case "ComputerScience":
 		//這邊打完所有教授的case
 			attack=30;
 			blood=100;
 			money=50;
-			power=10;
+			power=5;
+			break;
 		case "pein":
-			attack=10;
+			attack=40;
+			blood=100;
+			money=100;
+			power=5;
+			break;
+			
+		//昆展
+		case "monster4":
+			attack=50;
+			blood=100;
+			money=100;
+			power=5;
+			break;
+			
+		//孟勳
+		case "monster5":
+			attack=60;
 			blood=100;
 			money=100;
 			power=10;
+			break;
+		
+		//小光光
+		case "monster6":
+			attack=70;
+			blood=100;
+			money=100;
+			power=5;
+			break;
+			
+		
 		default:
 			break;
 		}

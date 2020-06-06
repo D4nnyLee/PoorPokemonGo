@@ -289,23 +289,23 @@ public class GameMap2 extends JPanel implements ActionListener{
 		
 		//4
 		if(person_x >270 && person_x < 470 && person_y > 0 && person_y < 160) {
-			System.out.println("computer");
+			System.out.println("4");
 			
-			M=new Status("ComputerScience");
+			M=new Status("monster4");
 			enter=true;
 		}
 		//5
 		if(person_x >950 && person_x < 1150 && person_y > 450 && person_y < 610) {
-			System.out.println("computer");
+			System.out.println("5");
 			
-			M=new Status("ComputerScience");
+			M=new Status("monster5");
 			enter=true;
 		}
 		//6
 		if(person_x >570 && person_x < 770 && person_y > 500 && person_y < 660) {
-			System.out.println("computer");
+			System.out.println("6");
 			
-			M=new Status("ComputerScience");
+			M=new Status("monster6");
 			enter=true;
 		}
 		if(enter)
@@ -315,7 +315,7 @@ public class GameMap2 extends JPanel implements ActionListener{
 		
 	}
 	private void enterBattle(Status M) {
-		MyPlayer.blood= 0;
+		MyPlayer.blood= 100;
 		
 		battle=new Battle(MyPlayer,M);
 		mainField.add(battle);

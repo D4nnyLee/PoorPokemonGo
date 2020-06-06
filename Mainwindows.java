@@ -10,10 +10,11 @@ public class Mainwindows extends JFrame {
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		setVisible(true);
 		setLayout(null);
-		GameMap1 map1 = new GameMap1();
-		GameMap2 map2 = new GameMap2(this,player);
 		
-		add(map1);
+		GameMap2 map2 = new GameMap2(this,player);
+		Tutorial tutorial = new Tutorial();
+		
+		add(tutorial);
 		add(map2);
 		
 		map2.requestFocusInWindow();

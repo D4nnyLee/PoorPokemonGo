@@ -5,6 +5,7 @@ import 	java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -17,6 +18,7 @@ public class Battle extends JPanel implements ActionListener{
 	 private Timer monsterTimer;
 	 private int monsterPath;
 	 private JLabel allAnnounce=new JLabel();
+	 private JButton escape=new JButton("逃跑...");
 	 private boolean endFlag=false;
 	 
 	 private int Y_tempAttack;	
@@ -37,6 +39,11 @@ public class Battle extends JPanel implements ActionListener{
 		monster=new Monster(this,MonsterState);
 		addButtonEvent();
 		newBackground();
+		//這邊設定逃跑按鈕
+		escape.setSize(100,50);
+		escape.setLocation(1100,600);
+		escape.addActionListener(this);
+		add(escape);
 		
 		//開始遊戲
 		allAnnounce.setText("我的回合!");
@@ -56,6 +63,8 @@ public class Battle extends JPanel implements ActionListener{
 		//System.out.println("fuck");
 	}
 	private void newBackground() {
+		Random random=new Random();
+		int path=random.nextInt(5)+1;
 		try {
 			JLabel jlb = new JLabel();	//例項化JLble
 			int width = 1300,height = 700;	//這是圖片和JLable的寬度和高度
@@ -80,80 +89,133 @@ public class Battle extends JPanel implements ActionListener{
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		int blood;
-		int attack;
-		Y_tempAttack=player.attack;
-		M_tempAttack=monster.attack;
+		//逃跑按鈕
 		
-		
-		//減少數量
-		int n=player.skill.get(e.getActionCommand());
-		n--;
-		player.skill.put(e.getActionCommand(), n);
-		JLabel temp=new JLabel();
-		temp=player.skillWatched.get(e.getActionCommand());
-		temp.setText(Integer.toString(n));
-		player.skillWatched.put(e.getActionCommand(), temp);
-		
-		switch (e.getActionCommand()) {
-		case "coffee":
-			blood=player.blooBar.getValue();
-			player.blood=blood+10;
-			player.blooBar.setValue(blood+10);
-			allAnnounce.setText("使用咖啡!");		
-		break;
-		case "redBlue":
-			blood=player.blooBar.getMaximum()/2;
-			player.blood=blood;
-			player.blooBar.setValue(blood);
-			System.out.println(player.blooBar.getValue());
-			allAnnounce.setText("使用redBlue!");		
-		break;
-		case "leg":
+		if(e.getActionCommand().equals("逃跑..."))
+			this.endFlag=true;
+		else {
+			int blood;
+			int attack;
+			Y_tempAttack=player.attack;
+			M_tempAttack=monster.attack;
 			
-			attack=(player.attack+=10);
-			player.attackText.setText("攻擊力:"+attack);
-			allAnnounce.setText("使用學霸大腿!");
 			
-		break;
-		case "underwear":
-			//System.out.println(property.Y_attack);
-			player.attack+=20;
-			attack=player.attack;
-			player.attackText.setText("攻擊力:"+attack);
-			allAnnounce.setText("使用學霸小褲褲!");
-		break;
-		case "G_test":
-			attack=(monster.attack-=10);
-			monster.attackText.setText("攻擊力:"+attack);
-			allAnnounce.setText("使用一般考古!");
-		break;
-		case "ticket":
-			monster.roundDelay=1;
-		allAnnounce.setText("使用回家車票!");
-		break;
-		default:
-			allAnnounce.setText("直接攻擊!");
+			//減少數量
+			int n=player.skill.get(e.getActionCommand());
+			n--;
+			player.skill.put(e.getActionCommand(), n);
+			JLabel temp=new JLabel();
+			temp=player.skillWatched.get(e.getActionCommand());
+			temp.setText(Integer.toString(n));
+			player.skillWatched.put(e.getActionCommand(), temp);
+			
+			switch (e.getActionCommand()) {
+			case "coffee":
+				blood=player.blooBar.getValue();
+				player.blood=blood+10;
+				player.blooBar.setValue(blood+10);
+				allAnnounce.setText("使用咖啡!");		
 			break;
-		}
-		for(int i=0;i<player.skillUse.size();++i)
-			//System.out.println(property.skillUse.get(i));
-			player.skillUse.get(i).setEnabled(false);
-			
-			
-		
-		AnnounceSkill.schedule(new TimerTask() {
-			
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-				allAnnounce.setText("");
+			case "redBlue":
+				blood=player.blooBar.getMaximum()/2;
+				player.blood=blood;
+				player.blooBar.setValue(blood);
+				System.out.println(player.blooBar.getValue());
+				allAnnounce.setText("使用redBlue!");		
+			break;
+			case "leg":
 				
-				StartGame();
+				attack=(player.attack+=10);
+				player.attackText.setText("攻擊力:"+attack);
+				allAnnounce.setText("使用學霸大腿!");
 				
+			break;
+			case "underwear":
+				//System.out.println(property.Y_attack);
+				player.attack+=20;
+				attack=player.attack;
+				player.attackText.setText("攻擊力:"+attack);
+				allAnnounce.setText("使用學霸小褲褲!");
+			break;
+			case "G_test":
+				attack=(monster.attack-=10);
+				monster.attackText.setText("攻擊力:"+attack);
+				allAnnounce.setText("使用一般考古!");
+			break;
+			case "ticket":
+				monster.roundDelay=1;
+			allAnnounce.setText("使用回家車票!");
+			break;
+			
+			
+			//特殊技能
+			case "phone":
+				if(M_name.equals("monster5"))
+				{
+					monster.roundDelay=2;
+					allAnnounce.setText("小孩電話接送!");
+				}	
+				else {
+					allAnnounce.setText("沒什麼事發生...");
+				}
+				break;
+			case "medician":
+				if(M_name.equals("monster4"))
+				{
+					monster.blood/=2;
+					monster.blooBar.setValue(monster.blood);
+					allAnnounce.setText("吃中藥拉肚子!");
+				}	
+				else {
+					allAnnounce.setText("沒什麼事發生...");
+				}
+				break;
+			case "mask":
+				if(M_name.equals("DataStructure"))
+				{
+					monster.roundDelay=2;
+					allAnnounce.setText("口罩缺貨喔!");
+				}	
+				else {
+					allAnnounce.setText("沒什麼事發生...");
+				}
+				break;
+			case "H_test":
+				if(M_name.equals("pein"))
+				{
+					monster.roundDelay=2;
+					allAnnounce.setText("學霸給考古啦!");
+				}	
+				else {
+					allAnnounce.setText("沒什麼事發生...");
+				}
+				break;
+			default:
+				allAnnounce.setText("直接攻擊!");
+				break;
 			}
-		}, 2000);
+			for(int i=0;i<player.skillUse.size();++i)
+				//System.out.println(property.skillUse.get(i));
+				player.skillUse.get(i).setEnabled(false);
+				
+				
+			
+			AnnounceSkill.schedule(new TimerTask() {
+				
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					allAnnounce.setText("");
+					
+					StartGame();
+					
+				}
+			}, 2000);
+			
+		}
 		
+		
+
 		
 
 	}
@@ -239,7 +301,7 @@ public class Battle extends JPanel implements ActionListener{
 		
 		
 		
-		
+		useMonsterSkill();
 		//跑怪物動畫
 		monster.setMonsterImage(true);
 		//等動畫跑完
@@ -255,15 +317,17 @@ public class Battle extends JPanel implements ActionListener{
 		//回來最初動畫
 		//攻擊動畫完畢施放教授大絕
 		
-		
+		//放完大絕再判斷得失
 		player.blood-=monster.attack;
 		player.blooBar.setValue(player.blood);
-		useMonsterSkill();
+		
 		
 		monster.setMonsterImage(false);
 		
 		
-
+		//回來最初設定
+		monster.attack=M_tempAttack;
+		monster.attackText.setText("攻擊:"+monster.attack);
 		
 
 	}
@@ -272,12 +336,44 @@ public class Battle extends JPanel implements ActionListener{
 		if(monster.powerBar.getValue()==monster.powerBar.getMaximum())
 		{
 			switch (this.M_name) {
-			case "blue":
+			case "pein":
+				//技能你不能攻擊2回合
 				player.roundDelay=2;
 				break;
-			case "boss":
-				player.blood=1;
-				player.blooBar.setValue(player.blood);
+			case "DataStructure":
+				//技能血量砍半攻擊加倍
+				monster.blood/=2;
+				monster.blooBar.setValue(monster.blood);
+				monster.attack*=2;
+				monster.attackText.setText("攻擊:"+monster.attack);
+				break;
+			case "ComputerScience":
+				
+				//技能血量回憶半
+				if(monster.blooBar.getMaximum()/2>=monster.blood)
+				{
+					monster.blood*=2;
+					monster.blooBar.setValue(monster.blood);
+				}
+				else {
+					monster.blood=monster.blooBar.getMaximum();
+					monster.blooBar.setValue(monster.blood);
+				}
+				
+				break;
+			case "monster4":
+				//出國不能攻擊2回合
+				player.roundDelay=2;
+				break;
+			case "monster5":
+				//我方攻擊力砍半
+				player.attack/=2;
+				player.attackText.setText("攻擊:"+player.attack);
+				break;
+			case "monster6":
+				//直接血量變成1
+				player.blood=1+monster.attack;
+				
 				break;
 			default:
 				break;
