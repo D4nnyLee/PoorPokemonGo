@@ -10,5 +10,7 @@ public class GameMap1  extends JPanel{
 		add(b);
 		setVisible(false);
 		
+		
+		
 	}
 }

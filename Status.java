@@ -1,3 +1,4 @@
+import java.util.Hashtable;
 import java.util.jar.Attributes.Name;
 
 public class Status {
@@ -8,22 +9,21 @@ public class Status {
 	public int blood;
 	public int exp;
 	public int money;
-	public String []skill;
+	public Hashtable<String,Integer> skill;
 	public int power;
 	public String name;
 	Status(String n){
 
 		this.name=n;
 		setStatus();
+		skill=new Hashtable<String, Integer>();
+		skill.put("coffee",2);
+		skill.put("H_test",5);
+		skill.put("underwear",8);
 	}
 	private void setStatus() {
 		switch (name) {
-		case"player":
-			attack=10;
-			blood=100;
-			String []temp= {"coffee","redBlue","ticket","medician","phone","mask","leg","underwear","G_test","H_test","None"};
-			skill=temp;
-			break;
+		
 		case"assistant":
 			attack=10;
 			blood=25;

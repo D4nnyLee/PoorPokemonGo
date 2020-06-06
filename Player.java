@@ -3,6 +3,7 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -12,21 +13,27 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
+import org.omg.CORBA.PRIVATE_MEMBER;
+
 public class Player extends Property {
 	public JLabel p;
 	public ArrayList<JButton> skillUse=new ArrayList<JButton>();
-	public String [] skill;
+	
+	public Hashtable<String,Integer> skill=new Hashtable<String, Integer>();
+	public Hashtable<String, JLabel> skillWatched=new Hashtable<String, JLabel>();
 	private Timer playerIdel=new Timer();
 	//傳給battle跑動畫用的
 	public int playerImageNum=0;
 	public String playerPath="image\\player\\player0";
 	public int playerWidth=150;
 	public int playerHeight=300;
+	private int i=0;
 	public Player(JPanel  fieldJPanel,Status pStatus) {
 		// TODO Auto-generated constructor stub
 		battleField=fieldJPanel;
 		setPlayer(pStatus);
 		setPlayerProperty();
+		//System.out.println(pStatus.skill.get("coffee"));
 		newskillButton();
 		
 		//開始player的timer
@@ -59,9 +66,10 @@ public class Player extends Property {
 		//player.setBackground(Color.red);
 		battleField.add(p);
 		attack=s.attack;
-		blood=s.blood;
+		blood=100;
 		money=s.money;
-		skill=s.skill;
+		
+		this.skill=s.skill;
 		
 		 
 	 }
@@ -89,21 +97,26 @@ public class Player extends Property {
 	}
 	private void newskillButton() {
 		//System.out.print(Y_skill[0]);
-		
-		for(int i=0;i<this.skill.length;++i)
-		{
+		skill.forEach((k,v)->{
 			
-			JButton button=new JButton(this.skill[i]);
-			button.setSize(80,50);
+			JButton button=new JButton(k);
+			button.setSize(150,50);
 			button.setVisible(true);
+			button.setLocation(0+170*(i/5),400+50*(i%5));
+			JLabel label=new JLabel(v.toString());
+			label.setSize(20,20);
+			label.setLocation(150+150*(i/5),400+50*(i%5));
+			label.setForeground(Color.white);
+			label.setFont(new Font("dialog",1,20));
 			
-			button.setLocation(0+80*(i/5),400+50*(i%5));
+			
+			skillWatched.put(k, label);
+		    skillUse.add(button);    
+			battleField.add(button);
+			battleField.add(label);
+			i++;
+		});
 
-		    skillUse.add(button);
-		    
-		    
-			battleField.add(skillUse.get(i));
-		}
 		
 	}
 

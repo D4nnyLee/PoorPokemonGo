@@ -46,7 +46,7 @@ public class Battle extends JPanel implements ActionListener{
 			public void run() {
 				// TODO Auto-generated method stub
 				allAnnounce.setText("");
-				for(int i=0;i<player.skill.length;++i)			
+				for(int i=0;i<player.skillUse.size();++i)			
 					player.skillUse.get(i).setEnabled(true);
 			}
 		}, 3000);
@@ -78,11 +78,23 @@ public class Battle extends JPanel implements ActionListener{
 	
 		
 	}
+	
 	public void actionPerformed(ActionEvent e) {
 		int blood;
 		int attack;
 		Y_tempAttack=player.attack;
 		M_tempAttack=monster.attack;
+		
+		
+		//減少數量
+		int n=player.skill.get(e.getActionCommand());
+		n--;
+		player.skill.put(e.getActionCommand(), n);
+		JLabel temp=new JLabel();
+		temp=player.skillWatched.get(e.getActionCommand());
+		temp.setText(Integer.toString(n));
+		player.skillWatched.put(e.getActionCommand(), temp);
+		
 		switch (e.getActionCommand()) {
 		case "coffee":
 			blood=player.blooBar.getValue();
@@ -226,10 +238,10 @@ public class Battle extends JPanel implements ActionListener{
 		}
 		
 		
-		monster.setMonsterImage(false);
+		
 		
 		//跑怪物動畫
-		
+		monster.setMonsterImage(true);
 		//等動畫跑完
 		try {
 			Thread.sleep(1500);
@@ -242,11 +254,13 @@ public class Battle extends JPanel implements ActionListener{
 		
 		//回來最初動畫
 		//攻擊動畫完畢施放教授大絕
+		
+		
 		player.blood-=monster.attack;
 		player.blooBar.setValue(player.blood);
-		
 		useMonsterSkill();
-		monster.setMonsterImage(true);
+		
+		monster.setMonsterImage(false);
 		
 		
 
@@ -324,8 +338,13 @@ public class Battle extends JPanel implements ActionListener{
 				else {
 					allAnnounce.setText("");
 					for(int i=0;i<player.skillUse.size();++i)
-						//System.out.println(property.skillUse.get(i));
-						player.skillUse.get(i).setEnabled(true);
+					{
+						String skillText= player.skillUse.get(i).getText();
+						//如果技能用為就不會true
+						if(player.skill.get(skillText)>0)
+							player.skillUse.get(i).setEnabled(true);
+					}
+
 				}
 
 			}
