@@ -109,7 +109,7 @@ public class GameMap2 extends JPanel implements ActionListener{
 			
 		});
 		setFocusable(true);
-		setVisible(true);
+		setVisible(false);
 		requestFocusInWindow();
 	
 		

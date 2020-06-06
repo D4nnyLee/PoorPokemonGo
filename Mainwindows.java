@@ -12,7 +12,7 @@ public class Mainwindows extends JFrame {
 		setLayout(null);
 		
 		GameMap2 map2 = new GameMap2(this,player);
-		Tutorial tutorial = new Tutorial();
+		Tutorial tutorial = new Tutorial(map2);
 		
 		add(tutorial);
 		add(map2);
