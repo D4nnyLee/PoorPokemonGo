@@ -20,18 +20,22 @@ public class GameMap2 extends JPanel implements ActionListener{
 				if(e.getKeyCode() == KeyEvent.VK_UP) {
 					person_y -=10;
 					character.setLocation(person_x,person_y);
+					character.setIcon(up_1);
 				}
 				if(e.getKeyCode() == KeyEvent.VK_DOWN) {
 					person_y +=10;
 					character.setLocation(person_x,person_y);
+					character.setIcon(down_1);
 				}
 				if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
 					person_x +=10;
 					character.setLocation(person_x,person_y);
+					character.setIcon(right_1);
 				}
 				if(e.getKeyCode() == KeyEvent.VK_LEFT) {
 					person_x -=10;
 					character.setLocation(person_x,person_y);
+					character.setIcon(left_1);
 				}
 				if(e.getKeyCode()==KeyEvent.VK_SPACE) {
 					//if(person_x + 40 );
@@ -69,6 +73,20 @@ public class GameMap2 extends JPanel implements ActionListener{
 	int x_lower = 0;
 	int y_up =0;
 	int y_lower = 0;
+	
+	ImageIcon down_1 = new ImageIcon("正面1.png"); 
+	ImageIcon down_2 = new ImageIcon("正面2.png"); 
+	ImageIcon down_3 = new ImageIcon("正面3.png"); 
+	ImageIcon up_1 = new ImageIcon("背面1.png"); 
+	ImageIcon up_2 = new ImageIcon("背面2.png"); 
+	ImageIcon up_3 = new ImageIcon("背面3.png"); 
+	ImageIcon right_1 = new ImageIcon("向右1.png"); 
+	ImageIcon right_2 = new ImageIcon("向右2.png"); 
+	ImageIcon right_3 = new ImageIcon("向右3.png"); 
+	ImageIcon left_1 = new ImageIcon("向左1.png"); 
+	ImageIcon left_2 = new ImageIcon("向左2.png"); 
+	ImageIcon left_3 = new ImageIcon("向左3.png"); 
+	
 	
 	private void newBackground() {
 		JLabel jlb = new JLabel();
@@ -140,8 +158,8 @@ public class GameMap2 extends JPanel implements ActionListener{
 		computer.setActionCommand("computer");
 		computer.addActionListener(this);
 		
-		ImageIcon cc = new ImageIcon("正面1.png");  
-		character = new JButton(cc);
+		
+		character = new JButton(down_1);
 		character.setContentAreaFilled(false);
 		character.setSize(60,70);
 		character.setLocation(person_x, person_y);      //再對照的時候就 x+10 y+40
