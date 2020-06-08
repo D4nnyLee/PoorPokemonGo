@@ -343,7 +343,7 @@ public class GameMap2 extends JPanel implements ActionListener{
 		}, 0, 500);
 	}
 	private void backMap() {
-		Mymoney+=battle.getMoney();
+		MyPlayer.money+=battle.getMoney();
 		battle.setVisible(false);
 		this.setVisible(true);
 		battle=null;

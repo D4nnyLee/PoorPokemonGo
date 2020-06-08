@@ -20,7 +20,7 @@ public class Battle extends JPanel implements ActionListener{
 	 private JLabel allAnnounce=new JLabel();
 	 private JButton escape=new JButton("逃跑...");
 	 private boolean endFlag=false;
-	 
+	 private boolean winFlag=false;
 	 private int Y_tempAttack;	
 	 private int M_tempAttack;
 	 
@@ -450,7 +450,7 @@ public class Battle extends JPanel implements ActionListener{
 	private void isWinGame() {
 		if(player.blooBar.getValue()==0)
 		{
-			
+			winFlag=false;
 			allAnnounce.setText("You Lose ┳Д┳");
 			//等宣言跑完
 			try {
@@ -469,7 +469,7 @@ public class Battle extends JPanel implements ActionListener{
 		}
 		else if(monster.blooBar.getValue()==0) {
 			allAnnounce.setText("You Win ≧▽≦");
-			
+			winFlag=true;
 			//等宣言跑完
 			try {
 				Thread.sleep(2000);
@@ -490,6 +490,10 @@ public class Battle extends JPanel implements ActionListener{
 		return endFlag;
 	}
 	public int getMoney() {
-		return monster.money;
+		if(winFlag)
+			return monster.money;
+		else {
+			return 0;
+		}
 	}
 }
