@@ -22,7 +22,7 @@ public class Player extends Property {
 	private Timer playerIdel=new Timer();
 	//傳給battle跑動畫用的
 	public int playerImageNum=0;
-	public String playerPath="image\\player\\player0";
+	public String playerPath="image/player/player0";
 	public int playerWidth=150;
 	public int playerHeight=300;
 	private int i=0;

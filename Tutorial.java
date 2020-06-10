@@ -21,7 +21,7 @@ public class Tutorial  extends JPanel implements ActionListener{
 	private void newBackground() {
 		JLabel jlb = new JLabel();
 		int width = 1300, height = 700;
-		ImageIcon image = new ImageIcon("image\\Map.png");
+		ImageIcon image = new ImageIcon("image/Map.png");
 		image.setImage(image.getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT));
 		jlb.setIcon(image);
 		jlb.setSize(width, height);

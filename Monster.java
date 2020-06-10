@@ -122,7 +122,7 @@ public class Monster extends Property{
 			default:
 				break;
 			}
-			 image2= new ImageIcon("image\\monster\\"+count+"fire.gif");//例項化ImageIcon 物件
+			 image2= new ImageIcon("image/monster/"+count+"fire.gif");//例項化ImageIcon 物件
 		}	
 		else {
 			switch (name) {
@@ -153,7 +153,7 @@ public class Monster extends Property{
 			default:
 				break;
 			}
-			image2 = new ImageIcon("image\\monster\\"+count+".gif");//例項化ImageIcon 物件
+			image2 = new ImageIcon("image/monster/"+count+".gif");//例項化ImageIcon 物件
 		}
 		image2.setImage(image2.getImage().getScaledInstance(width, height,Image.SCALE_DEFAULT ));
 

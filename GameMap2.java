@@ -21,18 +21,18 @@ public class GameMap2 extends JPanel implements ActionListener{
 	int y_up =0;
 	int y_lower = 0;
 	
-	ImageIcon down_1 = new ImageIcon("image\\MapPlayer\\正面1.png"); 
-	ImageIcon down_2 = new ImageIcon("image\\MapPlayer\\正面2.png"); 
-	ImageIcon down_3 = new ImageIcon("image\\MapPlayer\\正面3.png"); 
-	ImageIcon up_1 = new ImageIcon("image\\MapPlayer\\背面1.png"); 
-	ImageIcon up_2 = new ImageIcon("image\\MapPlayer\\背面2.png"); 
-	ImageIcon up_3 = new ImageIcon("image\\MapPlayer\\背面3.png"); 
-	ImageIcon right_1 = new ImageIcon("image\\MapPlayer\\向右1.png"); 
-	ImageIcon right_2 = new ImageIcon("image\\MapPlayer\\向右2.png"); 
-	ImageIcon right_3 = new ImageIcon("image\\MapPlayer\\向右3.png"); 
-	ImageIcon left_1 = new ImageIcon("image\\MapPlayer\\向左1.png"); 
-	ImageIcon left_2 = new ImageIcon("image\\MapPlayer\\向左2.png"); 
-	ImageIcon left_3 = new ImageIcon("image\\MapPlayer\\向左3.png"); 
+	ImageIcon down_1 = new ImageIcon("image/MapPlayer/正面1.png"); 
+	ImageIcon down_2 = new ImageIcon("image/MapPlayer/正面2.png"); 
+	ImageIcon down_3 = new ImageIcon("image/MapPlayer/正面3.png"); 
+	ImageIcon up_1 = new ImageIcon("image/MapPlayer/背面1.png"); 
+	ImageIcon up_2 = new ImageIcon("image/MapPlayer/背面2.png"); 
+	ImageIcon up_3 = new ImageIcon("image/MapPlayer/背面3.png"); 
+	ImageIcon right_1 = new ImageIcon("image/MapPlayer/向右1.png"); 
+	ImageIcon right_2 = new ImageIcon("image/MapPlayer/向右2.png"); 
+	ImageIcon right_3 = new ImageIcon("image/MapPlayer/向右3.png"); 
+	ImageIcon left_1 = new ImageIcon("image/MapPlayer/向左1.png"); 
+	ImageIcon left_2 = new ImageIcon("image/MapPlayer/向左2.png"); 
+	ImageIcon left_3 = new ImageIcon("image/MapPlayer/向左3.png"); 
 	
 	
 	
@@ -60,7 +60,7 @@ public class GameMap2 extends JPanel implements ActionListener{
 		mainField.add(st);
 		setSize(Toolkit.getDefaultToolkit().getScreenSize());
 
-		tutorial = new Tutorial(this);
+		// tutorial = new Tutorial(this);
 		
 		button_location();
  		store_buttom();
@@ -124,19 +124,19 @@ public class GameMap2 extends JPanel implements ActionListener{
 	private void newBackground() {
 		JLabel jlb = new JLabel();
 		int width = 1300,height = 700;
-		ImageIcon image = new ImageIcon("image\\Map.png");		
+		ImageIcon image = new ImageIcon("image/Map.png");		
 		image.setImage(image.getImage().getScaledInstance(width, height,Image.SCALE_DEFAULT ));	
 		jlb.setIcon(image);
 		jlb.setSize(width, height);
 			
 		this.add(jlb);
 	}
-	ImageIcon pp = new ImageIcon("image\\Monster\\1.gif");
-	ImageIcon da = new ImageIcon("image\\Monster\\2.gif");
-	ImageIcon com = new ImageIcon("image\\Monster\\3.gif");
-	ImageIcon m4=new ImageIcon("image\\Monster\\4.gif");
-	ImageIcon m5=new ImageIcon("image\\Monster\\5.gif");
-	ImageIcon m6=new ImageIcon("image\\Monster\\6.gif");
+	ImageIcon pp = new ImageIcon("image/Monster/1.gif");
+	ImageIcon da = new ImageIcon("image/Monster/2.gif");
+	ImageIcon com = new ImageIcon("image/Monster/3.gif");
+	ImageIcon m4=new ImageIcon("image/Monster/4.gif");
+	ImageIcon m5=new ImageIcon("image/Monster/5.gif");
+	ImageIcon m6=new ImageIcon("image/Monster/6.gif");
 	private void button_location() {		
 		pp.setImage(pp.getImage().getScaledInstance(250, 162,Image.SCALE_DEFAULT ));
 		da.setImage(da.getImage().getScaledInstance(250, 162,Image.SCALE_DEFAULT ));
@@ -197,7 +197,7 @@ public class GameMap2 extends JPanel implements ActionListener{
 
 	
 	private void store_buttom() {
-		ImageIcon store_image = new ImageIcon("image\\Store_icon.png");		
+		ImageIcon store_image = new ImageIcon("image/Store_icon.png");		
 		store_image.setImage(store_image.getImage().getScaledInstance(100, 60,Image.SCALE_DEFAULT ));	
 		JButton store = new JButton(store_image);
 		store.setActionCommand("store");
@@ -214,7 +214,7 @@ public class GameMap2 extends JPanel implements ActionListener{
 	
 	
 	private void bag_buttom() {
-		ImageIcon bag_buttom = new ImageIcon("image\\Bag_icon.png");		
+		ImageIcon bag_buttom = new ImageIcon("image/Bag_icon.png");		
 		bag_buttom.setImage(bag_buttom.getImage().getScaledInstance(100, 60,Image.SCALE_DEFAULT ));	
 		JButton bag = new JButton(bag_buttom);
 		bag.setActionCommand("bag");
@@ -239,9 +239,9 @@ public class GameMap2 extends JPanel implements ActionListener{
 			//this.mainField.setSize(1300,500);
 			break;
 		case "bag":
-			setVisible(false);
-			tutorial.setVisible(true);
-			tutorial.requestFocusInWindow();
+			// setVisible(false);
+			// tutorial.setVisible(true);
+			// tutorial.requestFocusInWindow();
 			break;	
 		}
 		this.requestFocusInWindow();
