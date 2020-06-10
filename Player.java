@@ -13,8 +13,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
-import org.omg.CORBA.PRIVATE_MEMBER;
-
 public class Player extends Property {
 	public JLabel p;
 	public ArrayList<JButton> skillUse=new ArrayList<JButton>();
