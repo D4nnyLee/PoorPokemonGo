@@ -22,7 +22,7 @@ public class Player extends Property {
 	public Hashtable<String,Integer> skill=new Hashtable<String, Integer>();
 	public Hashtable<String, JLabel> skillWatched=new Hashtable<String, JLabel>();
 	private Timer playerIdel=new Timer();
-	//å‚³çµ¦battleè·‘å‹•ç•«ç”¨çš„
+	//¶Çµ¹battle¶]°Êµe¥Îªº
 	public int playerImageNum=0;
 	public String playerPath="image\\player\\player0";
 	public int playerWidth=150;
@@ -36,7 +36,7 @@ public class Player extends Property {
 		//System.out.println(pStatus.skill.get("coffee"));
 		newskillButton();
 		
-		//é–‹å§‹playerçš„timer
+		//¶}©lplayerªºtimer
 		playerIdel.schedule(new TimerTask() {
 			
 			@Override
@@ -44,7 +44,7 @@ public class Player extends Property {
 				
 				// TODO Auto-generated method stub
 
-				ImageIcon image = new ImageIcon(playerPath+playerImageNum+".gif");//ä¾‹é …åŒ–ImageIcon ç‰©ä»¶
+				ImageIcon image = new ImageIcon(playerPath+playerImageNum+".gif");//¨Ò¶µ¤ÆImageIcon ª«¥ó
 				image.setImage(image.getImage().getScaledInstance(playerWidth, playerHeight,Image.SCALE_DEFAULT ));
 				p.setIcon(image);
 				
@@ -56,8 +56,8 @@ public class Player extends Property {
 		
 	}
 	public void setPlayer(Status s) {
-	 //è¨­å®š
-		p = new JLabel();	//ä¾‹é …åŒ–JLble
+	 //³]©w
+		p = new JLabel();	//¨Ò¶µ¤ÆJLble
 		int width = this.playerWidth;
 		int height = this.playerHeight;
 		p.setSize(width, height);
@@ -74,7 +74,7 @@ public class Player extends Property {
 		 
 	 }
 	public void setPlayerProperty() {
-		bloodText=new JLabel("æˆ‘æ–¹è¡€é‡");
+		bloodText=new JLabel("§Ú¤è¦å¶q");
 		bloodText.setSize(100,50);
 		bloodText.setForeground(Color.white);
 		bloodText.setFont(new Font("dialog", 1, 20));
@@ -85,7 +85,7 @@ public class Player extends Property {
 		blooBar.setForeground(Color.red);
 		blooBar.setSize(200,30);
 		blooBar.setLocation(0,50);
-		attackText=new JLabel("æ”»æ“ŠåŠ›:"+this.attack);
+		attackText=new JLabel("§ğÀ»¤O:"+this.attack);
 		attackText.setSize(100,50);
 		attackText.setLocation(0,100);
 		attackText.setForeground(Color.white);

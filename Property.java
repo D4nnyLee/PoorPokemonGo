@@ -21,7 +21,7 @@ public class Property {
 	public Property() {
 		// TODO Auto-generated constructor stub
 		
-		//ä¹‹å¾Œç”¨å‚³é€²ä¾†çš„
+		//¤§«á¥Î¶Ç¶i¨Óªº
 		
 		
 		

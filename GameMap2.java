@@ -21,18 +21,18 @@ public class GameMap2 extends JPanel implements ActionListener{
 	int y_up =0;
 	int y_lower = 0;
 	
-	ImageIcon down_1 = new ImageIcon("image\\MapPlayer\\æ­£é¢1.png"); 
-	ImageIcon down_2 = new ImageIcon("image\\MapPlayer\\æ­£é¢2.png"); 
-	ImageIcon down_3 = new ImageIcon("image\\MapPlayer\\æ­£é¢3.png"); 
-	ImageIcon up_1 = new ImageIcon("image\\MapPlayer\\èƒŒé¢1.png"); 
-	ImageIcon up_2 = new ImageIcon("image\\MapPlayer\\èƒŒé¢2.png"); 
-	ImageIcon up_3 = new ImageIcon("image\\MapPlayer\\èƒŒé¢3.png"); 
-	ImageIcon right_1 = new ImageIcon("image\\MapPlayer\\å‘å³1.png"); 
-	ImageIcon right_2 = new ImageIcon("image\\MapPlayer\\å‘å³2.png"); 
-	ImageIcon right_3 = new ImageIcon("image\\MapPlayer\\å‘å³3.png"); 
-	ImageIcon left_1 = new ImageIcon("image\\MapPlayer\\å‘å·¦1.png"); 
-	ImageIcon left_2 = new ImageIcon("image\\MapPlayer\\å‘å·¦2.png"); 
-	ImageIcon left_3 = new ImageIcon("image\\MapPlayer\\å‘å·¦3.png"); 
+	ImageIcon down_1 = new ImageIcon("image\\MapPlayer\\¥¿­±1.png"); 
+	ImageIcon down_2 = new ImageIcon("image\\MapPlayer\\¥¿­±2.png"); 
+	ImageIcon down_3 = new ImageIcon("image\\MapPlayer\\¥¿­±3.png"); 
+	ImageIcon up_1 = new ImageIcon("image\\MapPlayer\\­I­±1.png"); 
+	ImageIcon up_2 = new ImageIcon("image\\MapPlayer\\­I­±2.png"); 
+	ImageIcon up_3 = new ImageIcon("image\\MapPlayer\\­I­±3.png"); 
+	ImageIcon right_1 = new ImageIcon("image\\MapPlayer\\¦V¥k1.png"); 
+	ImageIcon right_2 = new ImageIcon("image\\MapPlayer\\¦V¥k2.png"); 
+	ImageIcon right_3 = new ImageIcon("image\\MapPlayer\\¦V¥k3.png"); 
+	ImageIcon left_1 = new ImageIcon("image\\MapPlayer\\¦V¥ª1.png"); 
+	ImageIcon left_2 = new ImageIcon("image\\MapPlayer\\¦V¥ª2.png"); 
+	ImageIcon left_3 = new ImageIcon("image\\MapPlayer\\¦V¥ª3.png"); 
 	
 	
 	
@@ -46,18 +46,22 @@ public class GameMap2 extends JPanel implements ActionListener{
 	private int Mymoney;
 	private Battle battle;
 	private Store st;
+	private Tutorial tutorial;
+	
 	
 	
 	
 	public GameMap2(JFrame jFrame,Status p) {
-		//åƒå‚³é€²ä¾†jframe
+		//¦Y¶Ç¶i¨Ójframe
 
 		this.mainField=jFrame;
-		//åƒmainwindowçš„Player
+		//¦YmainwindowªºPlayer
 		this.MyPlayer=p;
 		st = new Store(this);
 		mainField.add(st);
 		setSize(Toolkit.getDefaultToolkit().getScreenSize());
+		
+		tutorial = new Tutorial(); 
 		
 		button_location();
  		store_buttom();
@@ -163,7 +167,7 @@ public class GameMap2 extends JPanel implements ActionListener{
 		character = new JLabel(down_1);
 		//character.setContentAreaFilled(false);
 		character.setSize(60,70);
-		character.setLocation(person_x, person_y);      //å†å°ç…§çš„æ™‚å€™å°± x+10 y+40
+		character.setLocation(person_x, person_y);      //¦A¹ï·Óªº®É­Ô´N x+10 y+40
 		//setlocation(character);
 
 		//character.setBorderPainted(false); 
@@ -236,7 +240,9 @@ public class GameMap2 extends JPanel implements ActionListener{
 			//this.mainField.setSize(1300,500);
 			break;
 		case "bag":
-			System.out.println("open bag");
+			setVisible(false);
+	        tutorial.setVisible(true);
+	        tutorial.requestFocusInWindow();
 			break;	
 		}
 		this.requestFocusInWindow();
@@ -251,7 +257,7 @@ public class GameMap2 extends JPanel implements ActionListener{
 
 				
 				
-				//ç”Ÿæ€ª
+				//¥Í©Ç
 				Status M=new Status("TA");
 				enterBattle(M);
 			}
@@ -264,8 +270,8 @@ public class GameMap2 extends JPanel implements ActionListener{
 		if(person_x >500 && person_x < 700 && person_y > 80 && person_y < 240) {
 			System.out.println("pein");
 			
-			//é€™è£¡è§¸ç™¼æˆ°é¬¥
-			//è¨˜å¾—çµ¦æˆ‘boss name
+			//³o¸ÌÄ²µo¾Ô°«
+			//°O±oµ¹§Úboss name
 			M=new Status("pein");
 			enter=true;
 
@@ -327,7 +333,7 @@ public class GameMap2 extends JPanel implements ActionListener{
 			
 			public void run() {
 				// TODO Auto-generated method stub
-				//ä¸æ–·åµæ¸¬æ˜¯å¦çµæŸ
+				//¤£Â_°»´ú¬O§_µ²§ô
 				if(battle.isOver())
 				{
 					backMap();
@@ -398,5 +404,3 @@ public class GameMap2 extends JPanel implements ActionListener{
 
 	
 }
-
-

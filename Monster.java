@@ -122,7 +122,7 @@ public class Monster extends Property{
 			default:
 				break;
 			}
-			 image2= new ImageIcon("image\\monster\\"+count+"fire.gif");//ä¾‹é …åŒ–ImageIcon ç‰©ä»¶
+			 image2= new ImageIcon("image\\monster\\"+count+"fire.gif");//¨Ò¶µ¤ÆImageIcon ª«¥ó
 		}	
 		else {
 			switch (name) {
@@ -153,7 +153,7 @@ public class Monster extends Property{
 			default:
 				break;
 			}
-			image2 = new ImageIcon("image\\monster\\"+count+".gif");//ä¾‹é …åŒ–ImageIcon ç‰©ä»¶
+			image2 = new ImageIcon("image\\monster\\"+count+".gif");//¨Ò¶µ¤ÆImageIcon ª«¥ó
 		}
 		image2.setImage(image2.getImage().getScaledInstance(width, height,Image.SCALE_DEFAULT ));
 
@@ -165,7 +165,7 @@ public class Monster extends Property{
 		
 	}
 	public void setMonsterProperty() {
-		bloodText=new JLabel("æ•µæ–¹è¡€é‡");
+		bloodText=new JLabel("¼Ä¤è¦å¶q");
 		bloodText.setSize(100,50);
 		bloodText.setLocation(1100,0);
 		bloodText.setForeground(Color.white);
@@ -177,7 +177,7 @@ public class Monster extends Property{
 		blooBar.setForeground(Color.red);
 		blooBar.setSize(200,30);
 		blooBar.setLocation(1100,50);
-		attackText=new JLabel("æ”»æ“ŠåŠ›:"+this.attack);
+		attackText=new JLabel("§ğÀ»¤O:"+this.attack);
 		attackText.setSize(100,50);
 		attackText.setLocation(1100,100);
 		attackText.setForeground(Color.white);
