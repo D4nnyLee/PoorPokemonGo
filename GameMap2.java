@@ -47,11 +47,17 @@ public class GameMap2 extends JPanel implements ActionListener{
 	private Battle battle;
 	private Store st;
 	private Tutorial tutorial;
+	private boolean monster_win[] = new boolean[7];
+	private int  check_money = 0;
+	private int count_boss = 0;
 	
 	
 	
 	public GameMap2(JFrame jFrame,Status p) {
 		//吃傳進來jframe
+		for(int i = 0 ; i < 7 ; ++i) {
+			monster_win[i] = false;
+		}
 
 		this.mainField=jFrame;
 		//吃mainwindow的Player
@@ -248,7 +254,7 @@ public class GameMap2 extends JPanel implements ActionListener{
 	}	
 	
 	public void  the_TA_locaton(int person_x,int person_y) {
-		if(person_x >850 && person_x < 1300 && person_y > 0 && person_y < 400) {
+		if(person_x >850 && person_x < 1300 && person_y > 0 && person_y < 400 && monster_win[0] == false) {
 			Random random=new Random();
 			int randomNum=random.nextInt(10);
 			System.out.println(randomNum);
@@ -258,68 +264,81 @@ public class GameMap2 extends JPanel implements ActionListener{
 				
 				//生怪
 				Status M=new Status("TA");
-				enterBattle(M);
+				enterBattle(M , monster_win , 0);
+				
 			}
 		}
 	}
 	
 	public void the_professors(int person_x,int person_y) {
 		boolean enter=false;
+		int x = -1;
 		Status M=new Status("whatever");
-		if(person_x >500 && person_x < 700 && person_y > 80 && person_y < 240) {
+		if(person_x >500 && person_x < 700 && person_y > 80 && person_y < 240 &&monster_win[1] == false) {
 			System.out.println("pein");
 			
 			//這裡觸發戰鬥
 			//記得給我boss name
 			M=new Status("pein");
 			enter=true;
-
 			
+
+			x = 1;
 
 
 		}
-		if(person_x >40 && person_x < 240 && person_y > 60 && person_y < 220) {
+		if(person_x >40 && person_x < 240 && person_y > 60 && person_y < 220&&monster_win[2] == false) {
 			System.out.println("data_s");
 			
 			M=new Status("DataStructure");
 			enter=true;
+			x = 2;
 		}
 
-		if(person_x >280 && person_x < 480 && person_y > 490 && person_y < 650) {
+		if(person_x >280 && person_x < 480 && person_y > 490 && person_y < 650&&monster_win[3] == false) {
 			System.out.println("computer");
 			
 			M=new Status("ComputerScience");
 			enter=true;
+			x = 3;
 		}
 		
 		//4
-		if(person_x >270 && person_x < 470 && person_y > 0 && person_y < 160) {
+		if(person_x >270 && person_x < 470 && person_y > 0 && person_y < 160&&monster_win[4] == false) {
 			System.out.println("4");
 			
 			M=new Status("monster4");
 			enter=true;
+			x = 4;
 		}
 		//5
-		if(person_x >950 && person_x < 1150 && person_y > 450 && person_y < 610) {
+		if(person_x >950 && person_x < 1150 && person_y > 450 && person_y < 610&&monster_win[5] == false) {
 			System.out.println("5");
 			
 			M=new Status("monster5");
 			enter=true;
+			x = 5;
 		}
 		//6
-		if(person_x >570 && person_x < 770 && person_y > 500 && person_y < 660) {
+		if(person_x >570 && person_x < 770 && person_y > 500 && person_y < 660&&monster_win[6] == false) {
 			System.out.println("6");
 			
 			M=new Status("monster6");
 			enter=true;
+			x = 6;
 		}
 		if(enter)
 		{
-			enterBattle(M);
+			enterBattle(M,monster_win,x);
+		}
+		if(count_boss == 6) {
+			System.out.println("game over");
+
 		}
 		
 	}
-	private void enterBattle(Status M) {
+	private void enterBattle(Status M , boolean monster_win[],int x) {
+		check_money = 0;
 		MyPlayer.blood= 100;
 		
 		battle=new Battle(MyPlayer,M);
@@ -335,9 +354,27 @@ public class GameMap2 extends JPanel implements ActionListener{
 				//不斷偵測是否結束
 				if(battle.isOver())
 				{
-					backMap();
+					check_money = backMap();
 					//System.out.println("fuck");
 					listenEnd.cancel();
+					if(check_money > 0 && x!=0) {
+						monster_win[x] = true;
+						
+						if(x == 1 )
+							pein.setVisible(false);
+						else if(x == 2 )
+							data_s.setVisible(false);
+						else if(x == 3 )
+							computer.setVisible(false);
+						else if(x == 4 )
+							monster4.setVisible(false);
+						else if(x == 5 )
+							monster5.setVisible(false);
+						else if(x == 6 )
+							monster6.setVisible(false);
+						++count_boss ;
+						
+					}
 					
 					
 					
@@ -347,12 +384,15 @@ public class GameMap2 extends JPanel implements ActionListener{
 			}
 		}, 0, 500);
 	}
-	private void backMap() {
-		MyPlayer.money+=battle.getMoney();
+	private int backMap() {
+		int y = 0;
+		y = battle.getMoney();
+		MyPlayer.money += y;
 		battle.setVisible(false);
 		this.setVisible(true);
 		battle=null;
 		this.requestFocusInWindow();
+		return y;
 	}
 	
 	/*public void actionPerformed(ActionEvent e) {
