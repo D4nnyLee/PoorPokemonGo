@@ -51,6 +51,8 @@ public class GameMap2 extends JPanel implements ActionListener{
 	private int  check_money = 0;
 	private int count_boss = 0;
 	
+	//public JLabel dame_over = new JLabel();
+	
 	
 	
 	public GameMap2(JFrame jFrame,Status p) {
@@ -68,6 +70,9 @@ public class GameMap2 extends JPanel implements ActionListener{
 
 		tutorial = new Tutorial(this);
 		mainField.add(tutorial);
+		
+		
+		
 		
 		button_location();
  		store_buttom();
@@ -122,7 +127,7 @@ public class GameMap2 extends JPanel implements ActionListener{
 		setVisible(false);
 		requestFocusInWindow();
 	
-		
+	
 
 	}
 
@@ -333,6 +338,8 @@ public class GameMap2 extends JPanel implements ActionListener{
 		}
 		if(count_boss == 6) {
 			System.out.println("game over");
+			System.exit(1);
+			
 
 		}
 		

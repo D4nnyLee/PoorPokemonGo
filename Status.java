@@ -29,7 +29,7 @@ public class Status {
 		case"TA":
 			attack=10;
 			blood=10;
-			money=10;
+			money=30;
 			power=5;
 			break;
 		case "DataStructure":

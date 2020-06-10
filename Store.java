@@ -21,7 +21,7 @@ public class Store extends JPanel
         productList.put("coffee", new Product("coffee", 50, this));
         productList.put("G_test", new Product("G_test", 50, this));
 
-        productList.put("ticket", new Product("ticket", 200, this));
+        productList.put("ticket", new Product("ticket", 1000, this));
         productList.put("redblue", new Product("redblue", 200, this));
         productList.put("underwear", new Product("underwear", 200, this));
 
