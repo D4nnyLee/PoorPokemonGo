@@ -60,7 +60,8 @@ public class GameMap2 extends JPanel implements ActionListener{
 		mainField.add(st);
 		setSize(Toolkit.getDefaultToolkit().getScreenSize());
 
-		// tutorial = new Tutorial(this);
+		tutorial = new Tutorial(this);
+		mainField.add(tutorial);
 		
 		button_location();
  		store_buttom();
@@ -239,9 +240,8 @@ public class GameMap2 extends JPanel implements ActionListener{
 			//this.mainField.setSize(1300,500);
 			break;
 		case "bag":
-			// setVisible(false);
-			// tutorial.setVisible(true);
-			// tutorial.requestFocusInWindow();
+			setVisible(false);
+			tutorial.setVisible(true);
 			break;	
 		}
 		this.requestFocusInWindow();
