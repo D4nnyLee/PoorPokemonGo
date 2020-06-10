@@ -68,7 +68,7 @@ public class Battle extends JPanel implements ActionListener{
 		try {
 			JLabel jlb = new JLabel();	//例項化JLble
 			int width = 1300,height = 700;	//這是圖片和JLable的寬度和高度
-			ImageIcon image = new ImageIcon("image\\field1.png");//例項化ImageIcon 物件
+			ImageIcon image = new ImageIcon("image/field1.png");//例項化ImageIcon 物件
 	/*下面這句意思是:得到此圖示的 Image(image.getImage());
 	在此基礎上建立它的縮放版本,縮放版本的寬度,高度與JLble一致(getScaledInstance(width, height,Image.SCALE_DEFAULT ))
 	最後該影象就設定為得到的縮放版本(image.setImage)
@@ -238,7 +238,7 @@ public class Battle extends JPanel implements ActionListener{
 		
 		//這裡跑腳色動畫
 		player.playerImageNum=0;
-		player.playerPath="image\\playerAttack\\player";
+		player.playerPath="image/playerAttack/player";
 		player.playerWidth=400;
 		player.playerHeight=500;
 		player.p.setLocation(500,100);
@@ -261,7 +261,7 @@ public class Battle extends JPanel implements ActionListener{
 		
 		
 		//技能施展完要回來
-		player.playerPath="image\\player\\player0";
+		player.playerPath="image/player/player0";
 		player.playerWidth=tempWidth;
 		player.playerHeight=tempHeight;
 		player.p.setLocation(tempX,tempY);
